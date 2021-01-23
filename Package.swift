@@ -12,15 +12,18 @@ let package = Package(
             targets: ["BogusApp-Features-TargetsList"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "BogusApp-Common-Utils", url: "../../Common/BogusApp-Common-Utils.git", .branch("master")),
+        .package(name: "BogusApp-Common-Networking", url: "../../Common/BogusApp-Common-Networking.git", .branch("master"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "BogusApp-Features-TargetsList",
-            dependencies: []),
+            dependencies: [
+                .product(name: "BogusApp-Common-Utils", package: "BogusApp-Common-Utils"),
+                .product(name: "BogusApp-Common-Networking", package: "BogusApp-Common-Networking")
+            ]),
         .testTarget(
             name: "BogusApp-Features-TargetsListTests",
             dependencies: ["BogusApp-Features-TargetsList"]),
