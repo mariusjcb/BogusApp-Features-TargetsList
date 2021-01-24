@@ -18,7 +18,7 @@ public struct TargetsListViewModelActions {
 }
 
 public protocol TargetsListViewModelInput {
-    func didSelectItem(at index: Int)
+    func didSetValue(at index: Int, active: Bool)
     func didTapNext()
 }
 
@@ -74,8 +74,9 @@ public final class DefaultTargetsListViewModel: TargetsListViewModel {
     
     // MARK: - INPUT
     
-    public func didSelectItem(at index: Int) {
-        items[index].selected = true
+    public func didSetValue(at index: Int, active: Bool) {
+        items[index].selected = active
+        print(items[index].selected, index)
     }
     
     public func didTapNext() {
