@@ -11,9 +11,9 @@ import BogusApp_Common_Utils
 
 public struct TargetsListItemViewModel {
     public let id: UUID
-    
+
     public let title: String
-    
+
     @Observable
     public var selected: Bool = false
 }
@@ -23,7 +23,7 @@ extension TargetsListItemViewModel: Equatable {
         self.id = target.id
         self.title = target.title
     }
-    
+
     public static func == (lhs: TargetsListItemViewModel, rhs: TargetsListItemViewModel) -> Bool {
         return lhs.id == rhs.id
     }

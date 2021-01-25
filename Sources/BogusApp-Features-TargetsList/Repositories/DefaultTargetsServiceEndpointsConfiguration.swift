@@ -20,49 +20,49 @@ extension DefaultTargetsServiceEndpoints: EndpointProvider {
         case .targets(ids: _): return "targets"
         }
     }
-    
+
     public var isFullPath: Bool {
         switch self {
         case .targets(ids: _): return false
         }
     }
-    
+
     public var method: HTTPMethodType {
         switch self {
         case .targets(ids: _): return .get
         }
     }
-    
-    public var headerParamaters: [String : String] {
+
+    public var headerParamaters: [String: String] {
         switch self {
         case .targets(ids: _): return [:]
         }
     }
-    
+
     public var queryParametersEncodable: Encodable? {
         switch self {
         case .targets(ids: _): return nil
         }
     }
-    
-    public var queryParameters: [String : Any] {
+
+    public var queryParameters: [String: Any] {
         switch self {
         case .targets(ids: let ids): return ["id": ids]
         }
     }
-    
+
     public var bodyParamatersEncodable: Encodable? {
         switch self {
         case .targets(ids: _): return nil
         }
     }
-    
-    public var bodyParamaters: [String : Any] {
+
+    public var bodyParamaters: [String: Any] {
         switch self {
         case .targets(ids: _): return [:]
         }
     }
-    
+
     public var bodyEncoding: BodyEncoding {
         switch self {
         case .targets(ids: _): return .jsonSerializationData

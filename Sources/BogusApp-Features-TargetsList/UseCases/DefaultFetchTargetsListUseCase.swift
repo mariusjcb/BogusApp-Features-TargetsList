@@ -16,11 +16,11 @@ public protocol FetchTargetsListUseCase: UseCase {
 
 public final class DefaultFetchTargetsListUseCase: FetchTargetsListUseCase {
     private let targetsRepository: TargetsRepository
-    
+
     public init(targetsRepository: TargetsRepository) {
         self.targetsRepository = targetsRepository
     }
-    
+
     public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable? {
         return targetsRepository.fetchTargets(ids: ids, completion: completion)
     }

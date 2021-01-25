@@ -18,7 +18,7 @@ public protocol TargetsRepository {
 
 /// Default implementation of **TargetsRepository**
 public final class DefaultTargetsRepository: TargetsRepository {
-    
+
     private let targetsService: DataTransferService
     private let endpointsProvider: TargetsServiceEndpointsQueryable
 
@@ -26,13 +26,13 @@ public final class DefaultTargetsRepository: TargetsRepository {
         self.targetsService = targetsService
         self.endpointsProvider = endpointsProvider
     }
-    
+
     // MARK: - Targets Repository
-    
+
     public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable? {
         let task = RepositoryTask()
         task.networkTask = self.targetsService.request(with: endpointsProvider.targetsListEndpoint(ids: ids)) { completion($0.mapError { $0 as Error }) }
         return task
     }
-    
+
 }
