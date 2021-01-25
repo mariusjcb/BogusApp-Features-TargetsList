@@ -13,26 +13,24 @@ import BogusApp_Common_Networking
 /// Fetches data from Targets service or database / cache
 public protocol TargetsRepository {
     @discardableResult
-    func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable?
+    func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> DataRequest?
 }
 
 /// Default implementation of **TargetsRepository**
 public final class DefaultTargetsRepository: TargetsRepository {
 
-    private let targetsService: DataTransferService
+    private let targetsService: NetworkService
     private let endpointsProvider: TargetsServiceEndpointsQueryable
 
-    public init(targetsService: DataTransferService, endpointsProvider: TargetsServiceEndpointsQueryable) {
+    public init(targetsService: NetworkService, endpointsProvider: TargetsServiceEndpointsQueryable) {
         self.targetsService = targetsService
         self.endpointsProvider = endpointsProvider
     }
 
     // MARK: - Targets Repository
 
-    public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable? {
-        let task = RepositoryTask()
-        task.networkTask = self.targetsService.request(with: endpointsProvider.targetsListEndpoint(ids: ids)) { completion($0.mapError { $0 as Error }) }
-        return task
+    public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> DataRequest? {
+        return targetsService.request(with: endpointsProvider.targetsListEndpoint(ids: ids), completion: completion)
     }
 
 }

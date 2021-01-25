@@ -27,7 +27,7 @@ extension DefaultTargetsServiceEndpoints: EndpointProvider {
         }
     }
 
-    public var method: HTTPMethodType {
+    public var method: HTTPMethod {
         switch self {
         case .targets(ids: _): return .get
         }

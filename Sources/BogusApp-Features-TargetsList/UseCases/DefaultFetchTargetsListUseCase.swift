@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import BogusApp_Common_Networking
 import BogusApp_Common_Models
 import BogusApp_Common_Utils
 
 public protocol FetchTargetsListUseCase: UseCase {
     @discardableResult
-    func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable?
+    func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> DataRequest?
 }
 
 public final class DefaultFetchTargetsListUseCase: FetchTargetsListUseCase {
@@ -21,7 +22,7 @@ public final class DefaultFetchTargetsListUseCase: FetchTargetsListUseCase {
         self.targetsRepository = targetsRepository
     }
 
-    public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> Cancellable? {
+    public func fetchTargets(ids: [UUID], completion: @escaping (Result<[TargetSpecific], Error>) -> Void) -> DataRequest? {
         return targetsRepository.fetchTargets(ids: ids, completion: completion)
     }
 }
